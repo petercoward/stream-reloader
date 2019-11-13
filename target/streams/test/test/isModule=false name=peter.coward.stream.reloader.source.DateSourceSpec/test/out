@@ -1,6 +1,0 @@
-[0m[[0m[0minfo[0m] [0m[0m[32mDateSourceSpec:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mDateSource[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should stream datetimes at daily granularity[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should stream datetimes at monthly granularity[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should stream datetimes at hourly granularity[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should stream datetimes at yearly granularity[0m[0m

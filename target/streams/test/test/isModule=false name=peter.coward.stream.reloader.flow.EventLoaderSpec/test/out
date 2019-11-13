@@ -1,6 +1,0 @@
-[0m[[0m[0minfo[0m] [0m[0m[32mEventLoaderSpec:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mEventLoader[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should take in a datetime and output an Event[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should take in a sequence of datetimes and output Events[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should take in a datetime and load an event from S3[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m- should take in a sequence of datetimes and load events from S3[0m[0m

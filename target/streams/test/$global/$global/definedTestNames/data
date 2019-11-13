@@ -1,1 +1,0 @@
-["peter.coward.stream.reloader.source.DateSourceSpec","peter.coward.stream.reloader.config.ConfigSpec","peter.coward.stream.reloader.utils.S3UtilsSpec","peter.coward.stream.reloader.flow.EventLoaderSpec","peter.coward.stream.reloader.utils.LocalFileUtilsSpec"]
