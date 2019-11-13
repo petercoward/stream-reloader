@@ -1,0 +1,6 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mS3UtilsSpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mS3Utils[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should download and decompress a gzipped file from S3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should download and decompress all gzipped files in a path in S3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should download a file from S3[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should download all files in a path in S3[0m[0m

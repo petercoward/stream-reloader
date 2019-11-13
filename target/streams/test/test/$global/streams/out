@@ -1,0 +1,16 @@
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(peter.coward.stream.reloader.utils.S3UtilsSpec, org.scalatest.tools.Framework$$anon$1@3a462cb7, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(peter.coward.stream.reloader.source.DateSourceSpec, org.scalatest.tools.Framework$$anon$1@3a462cb7, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(peter.coward.stream.reloader.flow.EventLoaderSpec, org.scalatest.tools.Framework$$anon$1@3a462cb7, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(peter.coward.stream.reloader.config.ConfigSpec, org.scalatest.tools.Framework$$anon$1@3a462cb7, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning TaskDef(peter.coward.stream.reloader.utils.LocalFileUtilsSpec, org.scalatest.tools.Framework$$anon$1@3a462cb7, false, [SuiteSelector])[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 2 seconds, 309 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 17[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 5, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 17, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	peter.coward.stream.reloader.source.DateSourceSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	peter.coward.stream.reloader.config.ConfigSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	peter.coward.stream.reloader.utils.S3UtilsSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	peter.coward.stream.reloader.flow.EventLoaderSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0m	peter.coward.stream.reloader.utils.LocalFileUtilsSpec[0m
