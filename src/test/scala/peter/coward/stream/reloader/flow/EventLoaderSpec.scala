@@ -10,7 +10,7 @@ import io.findify.s3mock.S3Mock
 import org.joda.time.format.DateTimeFormat
 import org.scalatest.{BeforeAndAfterAll, FlatSpec, Matchers}
 import peter.coward.stream.reloader.messages.Event
-import peter.coward.stream.reloader.utils.S3Utils
+import peter.coward.stream.reloader.utils.{Granularity, S3Utils}
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -33,6 +33,8 @@ class EventLoaderSpec extends FlatSpec with Matchers with BeforeAndAfterAll {
     .build
 
   val formatter = DateTimeFormat.forPattern("dd/MM/yyyy")
+
+  val dayGranularity = Granularity.getByName("days")
 
   override def beforeAll(): Unit = {
     mockS3Api.start
@@ -58,7 +60,7 @@ class EventLoaderSpec extends FlatSpec with Matchers with BeforeAndAfterAll {
       Event("eventA", "1.0.0", "fake data 2")
     )
 
-    val eventLoader = new EventLoader(prefix, eventTypes, true, mockGetEvents).flow
+    val eventLoader = new EventLoader(prefix, eventTypes, dayGranularity.datePath(false, _), mockGetEvents).flow
 
     val dateTime = List(formatter.parseDateTime("01/01/2019"))
 
@@ -96,7 +98,7 @@ class EventLoaderSpec extends FlatSpec with Matchers with BeforeAndAfterAll {
       formatter.parseDateTime("02/01/2019")
     )
 
-    val eventLoader = new EventLoader(prefix, eventTypes, true, mockGetEvents).flow
+    val eventLoader = new EventLoader(prefix, eventTypes, dayGranularity.datePath(true, _), mockGetEvents).flow
 
     val future = Source(dateTime)
       .via(eventLoader)
@@ -138,7 +140,7 @@ class EventLoaderSpec extends FlatSpec with Matchers with BeforeAndAfterAll {
 
     val s3 = new S3Utils(client, mockBucket)
 
-    val eventLoader = new EventLoader(prefix, eventTypes, true, s3.getFilesInPath).flow
+    val eventLoader = new EventLoader(prefix, eventTypes, dayGranularity.datePath(true, _), s3.getFilesInPath).flow
 
     val future = Source(dateTime)
       .via(eventLoader)

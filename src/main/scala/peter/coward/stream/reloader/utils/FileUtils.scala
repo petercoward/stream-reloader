@@ -5,6 +5,7 @@ trait FileUtils {
     try f(param) finally param.close
   }
 
+
   def getGZipFile(path: String): List[String]
 
   def getGZipFilesInPath(path: String): List[String]
@@ -14,4 +15,14 @@ trait FileUtils {
   def getFilesInPath(path: String): List[String]
 
   protected def filesInPath(path: String, fileLoader: String => List[String]): List[String]
+
+  /**
+    * A function to get the right file loading function depending on whether the source data is gzipped
+    * @param gzipped A boolean stating whether the source data is gzipped
+    * @return either [[getFilesInPath]] or [[getGZipFilesInPath]] functions depending on the value of gzipped
+    */
+  def getFileLoader(gzipped: Boolean): String => List[String] = {
+    if(gzipped) getGZipFilesInPath
+    else getFilesInPath
+  }
 }

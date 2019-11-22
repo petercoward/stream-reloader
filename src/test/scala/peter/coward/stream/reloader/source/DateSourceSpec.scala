@@ -5,7 +5,7 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.Sink
 import org.joda.time.format.DateTimeFormat
 import org.scalatest.{FlatSpec, Matchers}
-import peter.coward.stream.reloader.messages.{DayGranularity, HourGranularity, MonthGranularity, YearGranularity}
+import peter.coward.stream.reloader.utils.{DayGranularity, HourGranularity, MonthGranularity, YearGranularity}
 
 import scala.concurrent.Await
 import scala.concurrent.duration._

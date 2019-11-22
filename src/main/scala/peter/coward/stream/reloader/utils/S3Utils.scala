@@ -15,7 +15,6 @@ class S3Utils(client: AmazonS3, bucket: String) extends FileUtils {
 
     using(Source.fromInputStream(gzIn)) { source =>
       source.getLines.toList
-
     }
   }
 

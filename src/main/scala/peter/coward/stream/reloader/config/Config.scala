@@ -8,7 +8,8 @@ case class Config(startDate: DateTime = DateTime.now(),
                   endDate: Option[DateTime] = None,
                   granularity: String = "",
                   partitionNames: Boolean = false,
-                  mode: String = "",
+                  mode: String = "local",
+                  gzipped: Boolean = false,
                   events: Map[String, List[String]] = Map(),
                   sourceBucket: String = "",
                   sourcePrefix: String = "",
@@ -38,14 +39,14 @@ object Config {
     }
   }
 
-  val granularities = List(
+  private val granularities = List(
     "years",
     "months",
     "days",
     "hours"
   )
 
-  val modes = List(
+  private val modes = List(
     "local",
     "s3"
   )
@@ -81,19 +82,33 @@ object Config {
           .action((x, c) => c.copy(partitionNames = x))
           .valueName("true/false")
           .text("Indicates whether the source folders have date partition names i.e. /year=yyyy/month=MM/day=dd/"),
+        opt[String]("mode")
+            .optional()
+            .validate(x =>
+              if (modes.contains(x)) success
+              else failure("Mode must be one of the following: 's3', 'local'")
+            )
+            .action((x, c) => c.copy(mode = x))
+            .valueName("s3/local")
+            .text("The mode to run stream-reloader in. Options are: 's3', 'local'. Default value is 'local'"),
+        opt[Boolean]("gzipped")
+            .optional()
+            .action((x, c) => c.copy(gzipped = x))
+            .valueName("true/false")
+            .text("Indicates whether the files to reload are gzipped"),
         opt[Map[String, List[String]]]("events")
           .required()
           .valueName("event1=v1|v2,event2=v2|v3|v4...")
           .action((x, c) => c.copy(events = x))
           .text("Events and their schema versions to be reloaded. Must be in the format 'event1=v1|v2,event2=v2|v3|v4' etc"),
         opt[String]("sourceBucket")
-          .required()
+          .optional()
           .action((x, c) => c.copy(sourceBucket = x))
           .text("The s3 bucket from which to reload events."),
         opt[String]("sourcePrefix")
             .required()
             .action((x, c) => c.copy(sourcePrefix = x))
-            .text("The prefix this event is stored under in s3"),
+            .text("The prefix this event is stored under"),
         opt[String]("destination")
           .required()
           .action((x, c) => c.copy(destinationTopic = x))
