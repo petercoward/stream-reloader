@@ -35,30 +35,43 @@ sealed trait Granularity[A <: BaseSingleFieldPeriod] {
       datetime
     }
   }
+  /**
+    * Generate an IndexedSeq of all date times between a start and end datetime
+    * @param start datetime to begin generating from
+    * @param end datetime to end the list with
+    * @return IndexedSeq of datetimes
+    */
+  def datesBetween(start: DateTime, end: DateTime): IndexedSeq[DateTime] = {
+    val interval = between(start, end)
+    val intervalType = interval.getFieldType
+    for {
+      time <- 0 to interval.get(intervalType)
+    } yield start.withFieldAdded(intervalType, time)
+  }
 }
 
 case object YearGranularity extends Granularity[Years] {
   def name = "years"
   override def between: (ReadableInstant, ReadableInstant) => Years = Years.yearsBetween
-  override protected def pattern = DateTimeFormat.forPattern("yyyy")
+  override protected def pattern: DateTimeFormatter = DateTimeFormat.forPattern("yyyy")
 }
 
 case object MonthGranularity extends Granularity[Months] {
   def name = "months"
   override def between: (ReadableInstant, ReadableInstant) => Months = Months.monthsBetween
-  override protected def pattern = DateTimeFormat.forPattern("yyyy/MM")
+  override protected def pattern: DateTimeFormatter = DateTimeFormat.forPattern("yyyy/MM")
 }
 
 case object DayGranularity extends Granularity[Days] {
   def name = "days"
   override def between: (ReadableInstant, ReadableInstant) => Days = Days.daysBetween
-  override protected def pattern = DateTimeFormat.forPattern("yyyy/MM/dd")
+  override protected def pattern: DateTimeFormatter = DateTimeFormat.forPattern("yyyy/MM/dd")
 }
 
 case object HourGranularity extends Granularity[Hours] {
   def name = "hours"
   override def between: (ReadableInstant, ReadableInstant) => Hours = Hours.hoursBetween
-  override protected def pattern = DateTimeFormat.forPattern("yyyy/MM/dd/HH")
+  override protected def pattern: DateTimeFormatter = DateTimeFormat.forPattern("yyyy/MM/dd/HH")
 }
 
 object Granularity {

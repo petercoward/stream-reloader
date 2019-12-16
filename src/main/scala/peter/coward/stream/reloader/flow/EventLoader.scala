@@ -27,11 +27,7 @@ class EventLoader(
           logger.info(s"Retrieved ${rawEvents.length} events for $eventName/$version")
 
           rawEvents map { data =>
-            Event(
-              eventName,
-              version,
-              data
-            )
+            Event(eventName, version, data)
           }
         }
     }

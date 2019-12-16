@@ -14,14 +14,28 @@ import peter.coward.stream.reloader.source.DateSource
 import peter.coward.stream.reloader.utils.{FileUtils, Granularity, LocalFileUtils, S3Utils}
 
 object Main extends App with StrictLogging {
+  //Set up actor system + materializer
+  implicit val system = ActorSystem("stream-reloader")
+  implicit val materializer = ActorMaterializer()
+
+  //Helper function to get the correct FileUtils based on mode (s3 or local)
+  def getFileUtils(mode: String): FileUtils = {
+    if (mode == "s3") {
+      val client = AmazonS3ClientBuilder
+        .standard
+        .withPathStyleAccessEnabled(true)
+        .withCredentials(new AWSStaticCredentialsProvider(new AnonymousAWSCredentials()))
+        .build
+      new S3Utils(client, config.sourceBucket)
+    } else {
+      new LocalFileUtils
+    }
+  }
+
   logger.info("stream-reloader spooling up...")
 
   //Load the config from args passed
   val config = Config(args)
-
-  //Set up actor system + materializer
-  implicit val system = ActorSystem("stream-reloader")
-  implicit val materializer = ActorMaterializer()
 
   //TODO: validate config, e.g. start date must be before end date
 
@@ -69,17 +83,4 @@ object Main extends App with StrictLogging {
     .via(kafkaSink.flow)
     .runWith(kafkaSink.sink)
 
-  //Helper function to get the correct FileUtils based on mode (s3 or local)
-  def getFileUtils(mode: String): FileUtils = {
-    if (mode == "s3") {
-      val client = AmazonS3ClientBuilder
-        .standard
-        .withPathStyleAccessEnabled(true)
-        .withCredentials(new AWSStaticCredentialsProvider(new AnonymousAWSCredentials()))
-        .build
-      new S3Utils(client, config.sourceBucket)
-    } else {
-      new LocalFileUtils
-    }
-  }
 }
