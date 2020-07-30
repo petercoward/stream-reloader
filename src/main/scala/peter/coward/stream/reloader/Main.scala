@@ -68,7 +68,7 @@ object Main extends App with StrictLogging {
     config.events,
     datePathFunc,
     fileLoaderFunc
-  ).flow
+  )
 
   //Set up the Kafka sink to write to kafka
   val kafkaSink = new KafkaSink(
@@ -79,7 +79,7 @@ object Main extends App with StrictLogging {
 
   //Run the graph
   source
-    .via(eventLoader)
+    .via(eventLoader.flow)
     .via(kafkaSink.flow)
     .runWith(kafkaSink.sink)
 
