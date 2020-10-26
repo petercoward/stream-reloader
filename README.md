@@ -1,7 +1,7 @@
 # stream-reloader
 Replay data from storage onto Kafka
 
-###Usage
+### Usage
 
 ``` 
 Usage: stream-reloader [options]
