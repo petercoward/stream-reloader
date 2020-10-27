@@ -20,6 +20,12 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-stream-kafka" % alpakkaV
   )
   
+  val embeddedKafkaV = "2.3.1"
+  
+  lazy val embeddedKafka = Seq(
+    "io.github.embeddedkafka" %% "embedded-kafka" % embeddedKafkaV % Test
+  )
+  
   val awscalaV = "0.8.+"
 
   lazy val awscala = Seq(
@@ -47,6 +53,6 @@ object Dependencies {
     "ch.qos.logback" % "logback-classic" % "1.2.3",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
   )
-  
-  lazy val deps = scalaTest ++ akka ++ alpakka ++ s3 ++ joda ++ scopt ++ logging
+
+  lazy val deps = scalaTest ++ akka ++ alpakka ++ embeddedKafka ++ s3 ++ joda ++ scopt ++ logging
 }
