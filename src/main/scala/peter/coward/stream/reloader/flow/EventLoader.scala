@@ -21,6 +21,7 @@ class EventLoader(
           val datePath = getDatePath(dt)
 
           val fullPath = s"$prefix/$eventName/$version/$datePath"
+          logger.debug(s"Retrieving events from ${fullPath}")
 
           val rawEvents = getEvents(fullPath)
 
